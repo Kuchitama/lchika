@@ -1,10 +1,18 @@
 require 'wiringpi'
-LED = 6
+LED = 1
 s = WiringPi::GPIO.new
-sig = 1
-s.mode(LED, OUTPUT)
+sig = 1024
+s.mode(LED, PWM_OUTPUT)
 10.times do
-	s.write(LED, sig)
-	sig = (sig == 1) ? 0 : 1
-	sleep(1)
+	(0..511).each do |x|
+		s.pwmWrite(LED, (1023 - 2 * x))
+		puts "#{1023- 2 * x}"
+		sleep(0.001)
+	end
+	(0..511).each do |x|
+		s.pwmWrite(LED, 2*x)
+		puts x
+		sleep(0.001)
+	end
 end
+s.pwmWrite(LED, 0)
