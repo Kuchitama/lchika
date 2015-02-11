@@ -1,3 +1,4 @@
+# http://lchikaamazon.hatenablog.com/entry/2013/11/18/191031
 require 'wiringpi'
 LED = 1
 s = WiringPi::GPIO.new
